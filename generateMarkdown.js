@@ -30,13 +30,58 @@ function renderLicenseLink(license) {
 
 // // TODO: Create a function that returns the license section of README
 // // If there is no license, return an empty string
-function renderLicenseSection(license) { }
+let renderLicenseSection = (license) => license !== "none" ? `This project uses the ${license}` : "N/A";
 
 // // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data, collabData) {
+  console.log(collabData);
+  // this function will check if second set of answers has been passed into it, if so, append collaborators from data into new list item. Else say there are no collaborators.
+  const collabList = function () {
+    if (Object.keys(collabData).length === 0) {
+      return "there are no collaborators"
+    } else {
+      let collabstr = '';
+      for (const key in collabData) {
+        collabstr = collabstr.concat(`[${collabData[key]}](https://www.github.com/${collabData[key]})  
+`);
+      }
+      return collabstr;
+    }
+  };
   return `# ${data.projectName}
-
-// `;
+${renderLicenseBadge(data.license)}
+## Table of Contents
+* [Description](#Description)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Test](#Test)
+* [License](#License)
+* [Contribute](#Contribute)
+* [Questions](#Questions)
+* [Collaborators](#Collaborators)
+## Description
+${data.description}
+---
+## Installation
+Installation instructions: ${data.installation}
+## Usage
+${data.usage}
+## Test
+Run this command to test: ${data.test}
+## License
+${renderLicenseSection(data.license)}
+${renderLicenseLink(data.license)}
+---
+## Contribute
+${data.contribute}
+## Questions
+If you have any follow up questions, feel free to reach out at ${data.email}
+GitHub: https://www.github.com/${data.username}
+## Collaborators
+${collabList()}
+`;
 }
+
+module.exports = generateMarkdown;
 
 module.exports = generateMarkdown;

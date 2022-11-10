@@ -52,7 +52,6 @@ const questions = [
     },
 ];
 
-const promptUser = () => inquirer.prompt(questions)
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => err ? console.log(err) : console.log("Success!"));
@@ -77,6 +76,8 @@ function init() {
             }
         })
 }
+
+
 
 // Function call to initialize app
 init();
